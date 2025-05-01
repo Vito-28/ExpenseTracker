@@ -38,7 +38,7 @@ https://roadmap.sh/projects/expense-tracker
   
 - **Aggiorna o Elimina la spesa**:
 
-  $ expense-tracker update 1 --description "Test Update" --amount 30
+  $ expense-tracker update --id 1 --description "Test Update" --amount 30
   
   $ expense-tracker delete --id 2
 
