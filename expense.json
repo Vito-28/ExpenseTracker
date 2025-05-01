@@ -1,0 +1,32 @@
+[
+    {
+        "date": "2025-04-28",
+        "amount": 20,
+        "description": "Lunch",
+        "id": 1
+    },
+    {
+        "date": "2025-04-29",
+        "amount": 40,
+        "description": "Expense",
+        "id": 3
+    },
+    {
+        "date": "2025-04-29",
+        "amount": 100,
+        "description": "Gym",
+        "id": 5
+    },
+    {
+        "date": "2025-04-29",
+        "amount": 300,
+        "description": "Soccer",
+        "id": 6
+    },
+    {
+        "date": "2025-05-01",
+        "amount": 300.65,
+        "description": "Tennis Lessons",
+        "id": 7
+    }
+]
