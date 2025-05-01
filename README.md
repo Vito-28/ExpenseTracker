@@ -1,5 +1,5 @@
 
-# Task Tracker CLI
+# Expense Tracker CLI
 
 Questo è un semplice progetto per il monitoraggio delle spese per gestire le tue finanze.
 
