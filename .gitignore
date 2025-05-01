@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icone e file di sistema
+Icon?
+._*
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+target/
+
+# Java
+*.class
+*.log
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle (se usi Gradle)
+.gradle/
+build/
+
+# Log ed errori
+hs_err_pid*
+replay_pid*
+
+# Backup temporanei
+*.swp
+*.swo
+*~
