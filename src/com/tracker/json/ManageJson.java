@@ -16,6 +16,18 @@ import com.tracker.model.Expense;
 
 public class ManageJson {
 	
+	public boolean writeObjectJson(Expense expense, List<Expense> expenses) {
+		
+		for(int i = 0; i < expenses.size(); i++) {
+			if(expenses.get(i).getId().equals(expense.getId())) {
+				expenses.set(i, expense);
+				return writeFileJson(expenses);
+			}
+		}
+		
+	    return false;
+	}
+	
 	public boolean writeFileJson(Expense expense) {
 	    Path path = Paths.get("expense.json");
 	    JSONArray jsonArray = new JSONArray();

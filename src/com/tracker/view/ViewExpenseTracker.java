@@ -13,7 +13,7 @@ public class ViewExpenseTracker {
 	
 	private Scanner scanner = new Scanner(System.in);
 	
-	public Expense insert(String input) {
+	public Expense insertAdd(String input) {
 		Expense expense = null;
 		
 		String regex = "add --description \"([^\"]+)\" --amount (\\d+(?:\\.\\d+)?)";
@@ -38,6 +38,33 @@ public class ViewExpenseTracker {
 
 	}
 	
+	public Expense insertUpdate(String input) {
+	    Expense expense = null;
+
+	    String regex = "update --id (\\d+) --description \"([^\"]+)\" --amount (\\d+(?:\\.\\d+)?)";
+
+	    Pattern pattern = Pattern.compile(regex);
+	    Matcher matcher = pattern.matcher(input);
+
+	    if (matcher.find()) {
+	        expense = new Expense();
+	        
+	        Long id = Long.parseLong(matcher.group(1));
+	        String description = matcher.group(2);
+	        Double amount = Double.parseDouble(matcher.group(3));
+	        
+	        expense.setId(id);
+	        expense.setDescription(description);
+	        expense.setAmount(amount);
+	        expense.setDate(LocalDate.now()); 
+	    } else {
+	        System.out.println("input non valido!");
+	    }
+
+	    return expense;
+	}
+
+	
 	public void printList(List<Expense> expense) {
 		
 		System.out.println("# ID  Date       Description  Amount");
@@ -54,6 +81,10 @@ public class ViewExpenseTracker {
 	
 	public Long insertId(String idStr) {
 		return Long.parseLong(idStr);
+	}
+	
+	public Double insertAmount(String amountStr) {
+		return Double.parseDouble(amountStr);
 	}
 	
 	public void print(String s) {

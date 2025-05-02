@@ -1,3 +1,4 @@
+
 package com.tracker.model;
 
 import java.time.Month;
@@ -24,6 +25,7 @@ public class ManageExpense {
 			expense.setId(id);
 			manageJson.writeFileJson(expense);
 			System.out.println("# Expense added successfully (ID:"+ id +")");
+			id++;
 		}
 	}
 	
@@ -70,6 +72,18 @@ public class ManageExpense {
 		}
 		
 		return sum;
+	}
+	
+	public void update(Expense tmp) {
+		Expense exp = selectExpenseForId(tmp.getId());
+		exp.setDescription(tmp.getDescription());
+		exp.setAmount(tmp.getAmount());
+		if(manageJson.writeObjectJson(exp, getListExpense())) {
+			System.out.println("# Expense update successfully");
+		} else {
+			System.out.println("# Expense Doesn't Exist");
+		}
+		
 	}
 
 	public List<Expense> getListExpense() {

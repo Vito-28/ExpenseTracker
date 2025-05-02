@@ -16,8 +16,10 @@ public class Main {
 	    do {
 	    	input = v.input();
 	    	String tmp = "";
-	    	String operation;
+	    	String operation = "";
 	    	String idStr = "";
+	    	String description = "";
+	    	String amountStr = "";
 	    	String month = "";
 	    	if(input.contains("add")) {
 	    		tmp = input;
@@ -31,11 +33,15 @@ public class Main {
 	    		String[] inputSplit = input.split(" ");
 	    		input = inputSplit[0]+ " " +inputSplit[1];
 	    		month = inputSplit[2];
+	    	} else if(input.contains("update")) {
+	    		String[] inputSplit = input.split(" ");
+	    		operation = input;
+	    		input = inputSplit[0];
 	    	}
 	    	
 	    	switch(input) {
 	    	case "add":
-	    		m.addExpense(v.insert(tmp));
+	    		m.addExpense(v.insertAdd(tmp));
 	    		break;
 	    	case "list":
 	    		v.printList(m.getListExpense());
@@ -45,6 +51,9 @@ public class Main {
 	    		break;
 	    	case "delete":
 	    		m.delete(v.insertId(idStr));
+	    		break;
+	    	case "update":
+	    		m.update(v.insertUpdate(operation));
 	    		break;
 	    	case "summary --month":
 	    		v.print("# Total expenses for "+
