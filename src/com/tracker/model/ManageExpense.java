@@ -2,6 +2,7 @@
 package com.tracker.model;
 
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tracker.json.ManageJson;
@@ -83,6 +84,20 @@ public class ManageExpense {
 		} else {
 			System.out.println("# Expense Doesn't Exist");
 		}
+		
+	}
+	
+	public List<Expense> getListExpenseForCategory(Category category) {
+		
+		List<Expense> expenses = new ArrayList<Expense>();
+		
+		for(Expense expense : getListExpense()) {
+			if(expense.getCategory().equals(category)) {
+				expenses.add(expense);
+			}
+		}
+		
+		return (expenses.size() == 0 ? null : expenses);
 		
 	}
 

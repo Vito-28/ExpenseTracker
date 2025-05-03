@@ -2,6 +2,7 @@ package com.tracker.controller;
 
 import java.time.Month;
 
+import com.tracker.model.Category;
 import com.tracker.model.ManageExpense;
 import com.tracker.view.ViewExpenseTracker;
 
@@ -21,6 +22,9 @@ public class Main {
 	    	String description = "";
 	    	String amountStr = "";
 	    	String month = "";
+	    	String categoryStr = "";
+	    	Category category = null;
+	    	
 	    	if(input.contains("add")) {
 	    		tmp = input;
 	    		operation = input.substring(0, 3);
@@ -37,6 +41,24 @@ public class Main {
 	    		String[] inputSplit = input.split(" ");
 	    		operation = input;
 	    		input = inputSplit[0];
+	    	} else if(input.contains("list --category")) {
+	    		String[] inputSplit = input.split(" ");
+	    		input = inputSplit[0] + " " + inputSplit[1];
+	    		categoryStr = inputSplit[2];
+	    		switch(categoryStr) {
+	    		case "Fixed":
+	    			category = Category.FIXED;
+	    			break;
+	    		case "Variable":
+	    			category = Category.VARIABLE;
+	    			break;
+	    		case "Savings":
+	    			category = Category.SAVINGS;
+	    			break;
+	    		}
+	    		
+	    		System.out.println(category);
+	    		
 	    	}
 	    	
 	    	switch(input) {
@@ -60,6 +82,10 @@ public class Main {
 	    	            (Month.of(Integer.parseInt(month))).toString().substring(0, 1).toUpperCase() +
 	    	            (Month.of(Integer.parseInt(month))).toString().substring(1).toLowerCase() +": " + 
 	    	             m.summaryForMonth(Month.of(Integer.parseInt(month))));
+	    		break;
+	    	case "list --category":
+	    		System.out.println("test");
+	    		v.printList(m.getListExpenseForCategory(category));
 	    		break;
 	    	case "exit":
 	    		m.setExit(true);

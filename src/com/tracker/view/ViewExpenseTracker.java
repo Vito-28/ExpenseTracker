@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.tracker.model.Category;
 import com.tracker.model.Expense;
 
 public class ViewExpenseTracker {
@@ -16,7 +17,7 @@ public class ViewExpenseTracker {
 	public Expense insertAdd(String input) {
 		Expense expense = null;
 		
-		String regex = "add --description \"([^\"]+)\" --amount (\\d+(?:\\.\\d+)?)";
+		String regex = "^add --description \"([^\"]+)\" --amount (\\d+(?:\\.\\d+)?) --category (Fixed|Variable|Savings)$";
 		
 		Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
@@ -25,10 +26,23 @@ public class ViewExpenseTracker {
         	expense = new Expense();
         	String description = matcher.group(1);
             Double amount = Double.parseDouble(matcher.group(2));
+            String category = matcher.group(3);
             
             expense.setDescription(description);
             expense.setAmount(amount);
             expense.setDate(LocalDate.now());
+            
+            switch(category) {
+            case "Fixed":
+            	expense.setCategory(Category.FIXED);
+            	break;
+            case "Variable":
+            	expense.setCategory(Category.VARIABLE);
+            	break;
+            case "Savings":
+            	expense.setCategory(Category.SAVINGS);
+            	break;
+            }
             
         } else {
         	System.out.println("input non valido!");
@@ -67,10 +81,15 @@ public class ViewExpenseTracker {
 	
 	public void printList(List<Expense> expense) {
 		
-		System.out.println("# ID  Date       Description  Amount");
+		if(expense == null) {
+			System.out.println("Expense Doesn't Exist");
+			return;
+		}
+		
+		System.out.println("# ID  Date       Description  Amount  Category");
 		
 		for(Expense exp : expense) {
-			System.out.println("# " + exp.getId() + "   " + exp.getDate() + "  " + exp.getDescription() + "       $" + exp.getAmount());
+			System.out.println("# " + exp.getId() + "   " + exp.getDate() + "  " + exp.getDescription() + "       $" + exp.getAmount() + "    " + exp.getCategory());
 		}
 	
 	}

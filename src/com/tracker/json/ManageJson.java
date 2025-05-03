@@ -12,6 +12,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.tracker.model.Category;
 import com.tracker.model.Expense;
 
 public class ManageJson {
@@ -46,11 +47,12 @@ public class ManageJson {
 	    jsonObject.put("description", expense.getDescription());
 	    jsonObject.put("amount", expense.getAmount());
 	    jsonObject.put("date", expense.getDate());
+	    jsonObject.put("category", expense.getCategory());
 	    
 	    jsonArray.put(jsonObject);
 
 	    try {
-	        Files.write(path, jsonArray.toString(4).getBytes());
+	        Files.write(path, jsonArray.toString(5).getBytes());
 	        return true;
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -68,11 +70,12 @@ public class ManageJson {
 	        jsonObject.put("description", expense.getDescription());
 	        jsonObject.put("amount", expense.getAmount());
 	        jsonObject.put("date", expense.getDate().toString());
+	        jsonObject.put("category", expense.getCategory().toString());
 	        jsonArray.put(jsonObject);
 	    }
 
 	    try {
-	        Files.write(path, jsonArray.toString(4).getBytes());
+	        Files.write(path, jsonArray.toString(5).getBytes());
 	        return true;
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -113,10 +116,24 @@ public class ManageJson {
 	            
 	            LocalDate date = LocalDate.parse(dateStr, formatter);
 	            
+	            Category category = null;
+	            switch(jsonObject.getString("category")) {
+	            case "FIXED":
+	            	category = Category.FIXED;
+	            	break;
+	            case "VARIABLE":
+	            	category = Category.VARIABLE;
+	            	break;
+	            case "SAVINGS":
+	            	category = Category.SAVINGS;
+	            	break;
+	            }
+	            
 	            exp.setId(id);
 	            exp.setDescription(description);
 	            exp.setAmount(amount);
 	            exp.setDate(date);
+	            exp.setCategory(category);
 	            
 	            expense.add(exp);
 	        }
