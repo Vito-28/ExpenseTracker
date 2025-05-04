@@ -79,6 +79,8 @@ public class ManageExpense {
 		Expense exp = selectExpenseForId(tmp.getId());
 		exp.setDescription(tmp.getDescription());
 		exp.setAmount(tmp.getAmount());
+		exp.setDate(tmp.getDate());
+		exp.setCategory(tmp.getCategory());
 		if(manageJson.writeObjectJson(exp, getListExpense())) {
 			System.out.println("# Expense update successfully");
 		} else {

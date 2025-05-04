@@ -1,16 +1,7 @@
-[
-     {
-          "date": "2025-05-03",
-          "amount": 20,
-          "description": "Lunch",
-          "id": 1,
-          "category": "SAVINGS"
-     },
-     {
-          "date": "2025-05-03",
-          "amount": 10,
-          "description": "Dinner",
-          "id": 2,
-          "category": "FIXED"
-     }
-]
+[{
+     "date": "2025-05-03",
+     "amount": 20,
+     "description": "Lunch",
+     "id": 1,
+     "category": "SAVINGS"
+}]

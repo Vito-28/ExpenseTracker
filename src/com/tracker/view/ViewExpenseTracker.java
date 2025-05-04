@@ -55,7 +55,7 @@ public class ViewExpenseTracker {
 	public Expense insertUpdate(String input) {
 	    Expense expense = null;
 
-	    String regex = "update --id (\\d+) --description \"([^\"]+)\" --amount (\\d+(?:\\.\\d+)?)";
+	    String regex = "update --id (\\d+) --description \"([^\"]+)\" --amount (\\d+(?:\\.\\d+)?) --category (Fixed|Variable|Savings)$";
 
 	    Pattern pattern = Pattern.compile(regex);
 	    Matcher matcher = pattern.matcher(input);
@@ -66,6 +66,19 @@ public class ViewExpenseTracker {
 	        Long id = Long.parseLong(matcher.group(1));
 	        String description = matcher.group(2);
 	        Double amount = Double.parseDouble(matcher.group(3));
+	        String category = matcher.group(4);
+	        
+	        switch(category) {
+            case "Fixed":
+            	expense.setCategory(Category.FIXED);
+            	break;
+            case "Variable":
+            	expense.setCategory(Category.VARIABLE);
+            	break;
+            case "Savings":
+            	expense.setCategory(Category.SAVINGS);
+            	break;
+            }
 	        
 	        expense.setId(id);
 	        expense.setDescription(description);
