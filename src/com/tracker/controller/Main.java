@@ -4,6 +4,7 @@ import java.time.Month;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.tracker.csv.ManageCSV;
 import com.tracker.model.Category;
 import com.tracker.model.ManageExpense;
 import com.tracker.view.ViewExpenseTracker;
@@ -12,6 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		ManageExpense m = new ManageExpense();
+		ManageCSV csv = new ManageCSV();
 		ViewExpenseTracker v = new ViewExpenseTracker();
 		
 		String input;
@@ -98,6 +100,9 @@ public class Main {
 	    		break;
 	    	case "list budget":
 	    		v.printBudgetForMonth(m.getMapBudgets());
+	    		break;
+	    	case "export":
+	    		csv.exportInCSV(m.getListExpense());
 	    		break;
 	    	case "exit":
 	    		m.setExit(true);
