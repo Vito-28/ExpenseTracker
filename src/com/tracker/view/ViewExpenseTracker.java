@@ -2,7 +2,9 @@ package com.tracker.view;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -90,7 +92,66 @@ public class ViewExpenseTracker {
 
 	    return expense;
 	}
-
+    
+	public Month insertMonth(String inputMonth) {
+		Month month = null;
+		
+		switch(inputMonth) {
+		case "9":
+			month = Month.SEPTEMBER;
+			break;
+		case "10":
+			month = Month.OCTOBER;
+			break;
+		case "11":
+			month = Month.NOVEMBER;
+			break;
+		case "12":
+			month = Month.DECEMBER;
+			break;
+		case "1":
+			month = Month.JANUARY;
+			break;
+		case "2":
+			month = Month.FEBRUARY;
+			break;
+		case "3":
+			month = Month.MARCH;
+			break;
+		case "4":
+			month = Month.APRIL;
+			break;
+		case "5":
+			month = Month.MAY;
+			break;
+		case "6":
+			month = Month.JUNE;
+			break;
+		case "7":
+			month = Month.JULY;
+			break;
+		case "8":
+			month = Month.AUGUST;
+			break;
+		default:
+			System.out.println("Error Month!!!");
+		}
+		
+		return month;
+	}
+	
+	public Double insertBudget(String inputBudget) {
+		return Double.parseDouble(inputBudget);
+	}
+	
+	public void printBudgetForMonth(Map<Month, Double> budgets) {
+		System.out.println("# Month    Budget");
+		for (Map.Entry<Month, Double> entry : budgets.entrySet()) {
+			Month key = entry.getKey();
+			Double val = entry.getValue();
+			System.out.println("# "+key + "   " + val);
+		}
+	}
 	
 	public void printList(List<Expense> expense) {
 		

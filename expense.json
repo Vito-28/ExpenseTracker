@@ -1,7 +1,30 @@
-[{
-     "date": "2025-05-03",
-     "amount": 20,
-     "description": "Lunch",
-     "id": 1,
-     "category": "SAVINGS"
-}]
+[
+     {
+          "date": "2025-05-06",
+          "amount": 500,
+          "description": "test",
+          "id": 1,
+          "category": "VARIABLE"
+     },
+     {
+          "date": "2025-05-06",
+          "amount": 500,
+          "description": "Gym",
+          "id": 2,
+          "category": "SAVINGS"
+     },
+     {
+          "date": "2025-05-06",
+          "amount": 500,
+          "description": "test2",
+          "id": 3,
+          "category": "SAVINGS"
+     },
+     {
+          "date": "2025-05-06",
+          "amount": 500,
+          "description": "Prova",
+          "id": 4,
+          "category": "FIXED"
+     }
+]

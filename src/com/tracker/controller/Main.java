@@ -1,6 +1,8 @@
 package com.tracker.controller;
 
 import java.time.Month;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.tracker.model.Category;
 import com.tracker.model.ManageExpense;
@@ -9,7 +11,6 @@ import com.tracker.view.ViewExpenseTracker;
 public class Main {
 
 	public static void main(String[] args) {
-		
 		ManageExpense m = new ManageExpense();
 		ViewExpenseTracker v = new ViewExpenseTracker();
 		
@@ -22,6 +23,7 @@ public class Main {
 	    	String description = "";
 	    	String amountStr = "";
 	    	String month = "";
+	    	String budgetStr = "";
 	    	String categoryStr = "";
 	    	Category category = null;
 	    	
@@ -59,6 +61,11 @@ public class Main {
 	    		
 	    		System.out.println(category);
 	    		
+	    	} else if(input.contains("set-budget")) {
+	    		String[] inputSplit = input.split(" ");
+	    		input = inputSplit[0];
+	    		month = inputSplit[2];
+	    		budgetStr = inputSplit[4];
 	    	}
 	    	
 	    	switch(input) {
@@ -84,8 +91,13 @@ public class Main {
 	    	             m.summaryForMonth(Month.of(Integer.parseInt(month))));
 	    		break;
 	    	case "list --category":
-	    		System.out.println("test");
 	    		v.printList(m.getListExpenseForCategory(category));
+	    		break;
+	    	case "set-budget":
+	    		m.setBudgetForMonth(v.insertMonth(month), v.insertBudget(budgetStr));
+	    		break;
+	    	case "list budget":
+	    		v.printBudgetForMonth(m.getMapBudgets());
 	    		break;
 	    	case "exit":
 	    		m.setExit(true);

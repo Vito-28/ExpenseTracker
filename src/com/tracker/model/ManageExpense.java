@@ -3,7 +3,9 @@ package com.tracker.model;
 
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.tracker.json.ManageJson;
 
@@ -22,6 +24,12 @@ public class ManageExpense {
 	}
 
 	public void addExpense(Expense expense) {
+		
+		if(!checkBudget(expense)) {
+			System.out.println("Exceeded Monthly Budget");
+			return;
+		}
+		
 		if(expense != null && !expense.equals(selectExpenseForId(id))) {
 			expense.setId(id);
 			manageJson.writeFileJson(expense);
@@ -89,6 +97,18 @@ public class ManageExpense {
 		
 	}
 	
+	public boolean checkBudget(Expense expense) {
+		
+		Map<Month, Double> budgets = getMapBudgets();
+		Month month = expense.getDate().getMonth();
+		Double budget = budgets.get(month);
+		Double tmp = summaryForMonth(month) + expense.getAmount();
+		System.out.println(month + " " + budget + " " + tmp);
+		
+		return (tmp <= budget);
+		
+	}
+	
 	public List<Expense> getListExpenseForCategory(Category category) {
 		
 		List<Expense> expenses = new ArrayList<Expense>();
@@ -107,4 +127,32 @@ public class ManageExpense {
 		return manageJson.getExpenseFromFileJSON();
 	}
 	
+	public void setBudgetForMonth(Month month, Double budget) {
+		Map<Month, Double> budgets = getMapBudgets();
+		
+		budgets.put(month, budget);
+		
+		manageJson.writeBudgetsFileJson(budgets);
+	}
+	
+	public Map<Month, Double> getMapBudgets() {
+		Map<Month, Double> map = manageJson.getBudgetsFromMonthFileJson();
+		
+		if(map.size() == 0) {
+			map.put(Month.SEPTEMBER, 0.0);
+			map.put(Month.OCTOBER, 0.0);
+			map.put(Month.NOVEMBER, 0.0);
+			map.put(Month.DECEMBER, 0.0);
+			map.put(Month.JANUARY, 0.0);
+			map.put(Month.FEBRUARY, 0.0);
+			map.put(Month.MARCH, 0.0);
+			map.put(Month.APRIL, 0.0);
+			map.put(Month.MAY, 0.0);
+			map.put(Month.JUNE, 0.0);
+			map.put(Month.JULY, 0.0);
+			map.put(Month.AUGUST, 0.0);
+		}
+		
+		return map;
+	}
 }
